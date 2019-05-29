@@ -1,5 +1,5 @@
 // Initialise board
-board = JXG.JSXGraph.initBoard('jxgbox', {boundingbox: [-1.5, 33.5, 33.5, -1.5], axis: true, grid: false, showCopyright: false});
+board = JXG.JSXGraph.initBoard('jxgbox1', {boundingbox: [-1.5, 33.5, 33.5, -1.5], axis: true, grid: false, showCopyright: false});
 
 
 // Define sliders to dynamically change parameters of the equations and create text elements to describe them
