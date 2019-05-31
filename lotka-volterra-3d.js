@@ -1,5 +1,5 @@
 let alpha = 0.3;
-let beta = 0.1;
+let beta = 0.28;
 let gamma = 0.7;
 let delta = 0.3;
 let x_0 = 10;
@@ -55,7 +55,7 @@ function setup() {
 
 function draw() {
     background(0);
-    scale(8);
+    scale(6,6,6);
     orbitControl();
 
     for (let i = 0; i < point_per_tick; ++i) {
