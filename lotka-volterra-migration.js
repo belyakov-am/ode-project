@@ -27,7 +27,7 @@ var g4_m = null;
 
 function ode_m() {
     var I_m = [0, 200];
-    var N_m = 10000;
+    var N_m = 5000;
 
     var f_m = function(t_m, x_m) {
         var alpha_m = alpha_slider_m.Value();

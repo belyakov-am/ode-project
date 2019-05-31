@@ -13,23 +13,29 @@
 <!doctype html>
 
 <head>
+    <!-- Distill template -->
     <script src="dist/template.v2.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1" >
     <meta charset="utf8">
 
-
+    <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="style.css">
 
-
+    <!-- JSXgraph -->
     <script type="text/javascript" charset="UTF-8"
                     src="//cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.99.7/jsxgraphcore.js"></script>
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.99.7/jsxgraph.css" />
-
     <script src='//cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.99.7/geonext.min.js' type='text/javascript'></script>
 
+    <!-- P5 -->
+    <script src="https://cdn.jsdelivr.net/npm/p5@0.8.0/lib/p5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@0.8.0/lib/addons/p5.dom.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.js"></script>
-    <script src="https://rawgit.com/lmccart/p5.js/master/lib/addons/p5.dom.js"></script>
+    <!-- JQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- scripts -->
+    <script src="edit-header.js"></script>
 
 </head>
 
@@ -69,7 +75,7 @@
 </d-front-matter>
 
 <d-title>
-    <figure style="grid-column: page; margin: 1rem 0;"><img src="pred-prey-4.jpg" style="width:100%; border: 1px solid rgba(0, 0, 0, 0.2);"/></figure>
+    <figure style="grid-column: page; margin: 1rem 0;"><img src="pred-prey-6.jpg" style="width:100%; border: 1px solid rgba(0, 0, 0, 0.2);"/></figure>
 </d-title>
 
 <d-byline id="authors"></d-byline>
@@ -371,6 +377,53 @@
 
 
 
+    <a class="marker" href="#section-4" id="section-4"><span>4</span></a>
+    <h2>Многомерный случай</h2>
+    Вито Вольтерра вывел уравнения для n-мерного случая, которые записываются в виде
+    <d-math block>
+        \dot{x_i} = x_i \cdot f(x), \text{ где } f(x) = r + Ax
+    </d-math>
+    <p>
+        Здесь $$x_1, . . , x_n$$ &#8212 размеры популяций n различных видов животных, которые взаимодействуют в одной среде, $$x$$ &#8212
+        вектор, составленный из этих неизвестных. Параметры в векторе $$r$$ отвечают за успех (вероятность) рождаемости ($$r_i > 0$$) или смертности ($$r_i < 0$$)).
+        Матрица A отвечает за взаимоотношения между животными разных видов. Так, значение $$a_{ij}$$ отвечает за то, как влияет вид j на вид i. Например, если оба
+        значения $$a_{ij}, a_{ji}$$ положительные, то особи получают выгоду от взаимодействия, если оба отрицательные, то они враждуют между собой. Если же
+        $$a_{ij} > 0, \, a_{ji} < 0$$, то вид i будет хищников, а j &#8212 жертвой для него. Значения $$a_{ii}$$ отвечают
+        за воздействие вида на самого себя. Для приближения к реальности они полагаются отрицательными, что вполне разумно.
+        <d-cite key="volterra-ref-1"></d-cite>
+    </p>
+    <p>
+        В качестве примера рассмотрим случай n = 2. Тогда изначальную систему модели Лотки-Вольтерра можно переписать в виде
+    </p>
+    <d-math block>
+        \begin{cases}
+            \dot{x} = \alpha x - \beta x y - \epsilon x^2 \\
+            \dot{y} = -\gamma y + \delta x y - \zeta y^2
+        \end{cases}
+        \qquad \alpha, \beta, \gamma, \delta, \epsilon, \zeta > 0
+    </d-math>
+    <p>
+        Тут параметры $$\epsilon, \, \zeta$$ можно понимать, как верояность того, что животное причинт само себе ущерб.
+        Чтобы понять и протестировать, как меняются размеры популяций при добавлении новых параметров, можно использовать графики ниже.
+    </p>
+
+    <p>
+    <h2><span class="mw-headline" id="Plot-5"></span></h2>
+    <h5>По горизонтальной оси отложено время, по вертикальной &#8212 размеры популяций жертв и хищников</h5>
+    <div id='jxgbox-1' class='jxgbox' style='width:600px; height:600px;'></div>
+
+    <script type="text/javascript" src="lotka-volterra-1.js"></script>
+    </p>
+
+    <p>
+    <h2><span class="mw-headline" id="Plot-6"></span></h2>
+    <h5>По горизонтали отложен размер популяции травоядных, по вертикали &#8212 хищников</h5>
+    <div id='jxgbox-phase1' class='jxgbox' style='width:600px; height:600px;'></div>
+
+    <script type="text/javascript" src="lotka-volterra-phase1.js"></script>
+    </p>
+
+
 
 </d-article>
 
@@ -381,6 +434,6 @@
 </d-appendix>
 
 
-<distill-footer></distill-footer>
+<!--<distill-footer></distill-footer>-->
 
 </body>

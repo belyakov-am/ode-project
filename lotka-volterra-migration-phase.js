@@ -1,15 +1,15 @@
 board_mp = JXG.JSXGraph.initBoard('jxgbox-mp', {boundingbox: [-4, 42.5, 42.5, -3.5], axis: true, grid: false, showCopyright: false});
 
-alpha_slider_mp = board_mp.createElement('slider', [[3.0, 40.5], [8.0, 40.5], [0.0, 0.42, 1.0]],{name:'&alpha;',strokeColor:'black',fillColor:'black'});
+alpha_slider_mp = board_mp.createElement('slider', [[3.0, 40.5], [8.0, 40.5], [0.0, 0.44, 1.0]],{name:'&alpha;',strokeColor:'black',fillColor:'black'});
 alpha_text_mp = board_mp.createElement('text', [5, 39.5, "alpha"], {fixed:true});
 
-beta_slider_mp = board_mp.createElement('slider', [[13.0, 40.5], [18.0, 40.5], [0.0, 0.14, 1.0]],{name:'&beta;',strokeColor:'black',fillColor:'black'});
+beta_slider_mp = board_mp.createElement('slider', [[13.0, 40.5], [18.0, 40.5], [0.0, 0.19, 1.0]],{name:'&beta;',strokeColor:'black',fillColor:'black'});
 beta_text_mp = board_mp.createElement('text', [13, 39.5, "beta"], {fixed:true});
 
-gamma_slider_mp = board_mp.createElement('slider', [[23.0, 40.5], [28.0, 40.5], [0.0, 0.79, 1.0]],{name:'&gamma;',strokeColor:'black',fillColor:'black'});
+gamma_slider_mp = board_mp.createElement('slider', [[23.0, 40.5], [28.0, 40.5], [0.0, 0.88, 1.0]],{name:'&gamma;',strokeColor:'black',fillColor:'black'});
 gamma_text_mp = board_mp.createElement('text', [23, 39.5, "gamma"], {fixed:true});
 
-delta_slider_mp = board_mp.createElement('slider', [[33.0, 40.5], [38.0, 40.5], [0.0, 0.17, 1.0]],{name:'&delta;',strokeColor:'black',fillColor:'black'});
+delta_slider_mp = board_mp.createElement('slider', [[33.0, 40.5], [38.0, 40.5], [0.0, 0.12, 1.0]],{name:'&delta;',strokeColor:'black',fillColor:'black'});
 delta_text_mp = board_mp.createElement('text', [33, 39.5, "delta"], {fixed:true});
 
 c_slider_mp = board_mp.createElement('slider', [[3.0, 36.3], [18.0, 36.3], [0.0, 0.05, 1.0]],{name:'c',strokeColor:'black',fillColor:'black'});

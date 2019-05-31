@@ -1,16 +1,16 @@
 board = JXG.JSXGraph.initBoard('jxgbox', {boundingbox: [-4, 40.5, 95.5, -3.5], axis: true, grid: false, showCopyright: false});
 
-s = board.createElement('slider', [[10.0, 38.5], [20.0, 38.5], [0.0, 0.3, 1.0]],{name:'&alpha;',strokeColor:'black',fillColor:'black'});
-st = board.createElement('text', [10, 37.5, "alpha"], {fixed:true});
+alpha_slider = board.createElement('slider', [[10.0, 38.5], [20.0, 38.5], [0.0, 0.3, 1.0]],{name:'&alpha;',strokeColor:'black',fillColor:'black'});
+alpha_text = board.createElement('text', [10, 37.5, "alpha"], {fixed:true});
 
-o = board.createElement('slider', [[30.0, 38.5], [40.0, 38.5], [0.0, 0.28, 1.0]],{name:'&beta;',strokeColor:'black',fillColor:'black'});
-ot = board.createElement('text', [30, 37.5, "beta"], {fixed:true});
+beta_slider = board.createElement('slider', [[30.0, 38.5], [40.0, 38.5], [0.0, 0.28, 1.0]],{name:'&beta;',strokeColor:'black',fillColor:'black'});
+beta_text = board.createElement('text', [30, 37.5, "beta"], {fixed:true});
 
-u = board.createElement('slider', [[50.0, 38.5], [60.0, 38.5], [0.0, 0.7, 1.0]],{name:'&gamma;',strokeColor:'black',fillColor:'black'});
-ut = board.createElement('text', [50, 37.5, "gamma"], {fixed:true});
+gamma_slider = board.createElement('slider', [[50.0, 38.5], [60.0, 38.5], [0.0, 0.7, 1.0]],{name:'&gamma;',strokeColor:'black',fillColor:'black'});
+gamma_text = board.createElement('text', [50, 37.5, "gamma"], {fixed:true});
 
-p = board.createElement('slider', [[70.0, 38.5], [80.0, 38.5], [0.0, 0.3, 1.0]],{name:'&delta;',strokeColor:'black',fillColor:'black'});
-pt = board.createElement('text', [70, 37.5, "delta"], {fixed:true});
+delta_slider = board.createElement('slider', [[70.0, 38.5], [80.0, 38.5], [0.0, 0.3, 1.0]],{name:'&delta;',strokeColor:'black',fillColor:'black'});
+delta_text = board.createElement('text', [70, 37.5, "delta"], {fixed:true});
 
 startprey = board.createElement('glider', [0, 10, board.defaultAxes.y], {name:'Preys',strokeColor:'blue',fillColor:'blue'});
 startpred = board.createElement('glider', [0, 5, board.defaultAxes.y], {name:'Predators',strokeColor:'red',fillColor:'red'});
@@ -22,7 +22,7 @@ var g4 = null;
 function solve_ode(x0, I, N, f) {
     var data = [x0];
     var dt = (I[1] - I[0]) / N;
-    for (var i = 1; i < N; ++i) {
+    for (let i = 1; i < N; ++i) {
         var dx_dt = data[i - 1][0] + dt * f(0, data[i - 1])[0];
         var dy_dt = data[i - 1][1] + dt * f(0, data[i - 1])[1];
         data.push([dx_dt, dy_dt]);
@@ -36,14 +36,14 @@ function ode() {
     var N = 1000;
 
     var f = function(t, x) {
-        var bpred = s.Value();
-        var bprey = u.Value();
-        var dpred = o.Value();
-        var dprey = p.Value();
+        var alpha = alpha_slider.Value();
+        var beta = beta_slider.Value();
+        var gamma = gamma_slider.Value();
+        var delta = delta_slider.Value();
 
         var y = [];
-        y[0] = x[0]*(bpred - dpred*x[1]);
-        y[1] = x[1]*(-bprey + dprey*x[0]);
+        y[0] = x[0] * (alpha - beta * x[1]);
+        y[1] = x[1] * (-gamma + delta * x[0]);
 
         return y;
     };
@@ -53,8 +53,8 @@ function ode() {
     var data = solve_ode(x0, I, N, f);
 
     var q = I[0];
-    var h = (I[1]-I[0])/N;
-    for(var i=0; i<data.length; i++) {
+    var h = (I[1] - I[0]) / N;
+    for(let i = 0; i < data.length; i++) {
         data[i].push(q);
         q += h;
     }
@@ -78,7 +78,7 @@ g3.updateDataArray = function() {
     var data = ode();
     this.dataX = [];
     this.dataY = [];
-    for(var i=0; i<data.length; i++) {
+    for(let i = 0; i < data.length; i++) {
         this.dataX[i] = t[i];
         this.dataY[i] = data[i][1];
     }
@@ -89,7 +89,7 @@ g4.updateDataArray = function() {
     var data = ode();
     this.dataX = [];
     this.dataY = [];
-    for(var i=0; i<data.length; i++) {
+    for(let i = 0; i < data.length; i++) {
         this.dataX[i] = t[i];
         this.dataY[i] = data[i][0];
     }
