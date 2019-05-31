@@ -8,7 +8,6 @@ let y_0 = 5;
 let points_count = 1000;
 let point_per_tick = 10;
 let dt = 0.01;
-
 let points = [];
 
 
@@ -60,6 +59,7 @@ function draw() {
 
     for (let i = 0; i < point_per_tick; ++i) {
         points.push(new p5.Vector(boat.t, boat.x, boat.y));
+        print(boat.t, boat.x, boat.y);
         boat.move_points();
     }
 
