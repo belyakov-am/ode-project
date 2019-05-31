@@ -7,7 +7,7 @@ let y_0 = 5;
 
 let points_count = 1000;
 let point_per_tick = 10;
-let dt = 0.05;
+let dt = 0.01;
 
 let points = [];
 
