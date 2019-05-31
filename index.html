@@ -75,7 +75,7 @@
 <d-byline id="authors"></d-byline>
 <d-article>
     <a class="marker" href="#section-0" id="section-0"><span>0</span></a>
-    <h3>Предыстория</h3>
+    <h2>Предыстория</h2>
     <p>Изначально Альфред Лотка вообще не планировал создавать никаких математических моделей, но в итоге судьба привел его к такому исходу, как это часто бывает в науке.
         В его планах было создать новую предметную область &#8212 "физическую биологию", поэтому начиная с 1902 года он начал публиковать небольшие статьи, связанные с этой областью.
         Параллельно с этим у него рос интерес к приложениям математики в биологии. Однако, ввиду отсутствия должных связей в научной среде и работы в одиночестве,
@@ -102,8 +102,7 @@
 
 
     <a class="marker" href="#section-1" id="section-1"><span>1</span></a>
-    <h2>Модель Лотки-Вольтерра</h2>
-    <h3>Описание системы</h3>
+    <h2>Описание модель Лотки-Вольтерра</h2>
     <p>Система Лотки-Вольтерра является первоначальной и простейшей системой (усложненные системы будут рассмотрены ниже) для описания модели "хищник-жертва",
         то есть популяции хищников и популяции жертв, взаимодействующих в какой-то среде: жертвы едят растительность, хищники &#8212 жертв</p>
     <d-math block>
@@ -160,9 +159,9 @@
 
 
     <a class="marker" href="#section-2" id="section-2"><span>2</span></a>
-    <h2>Особая точка</h2>
+    <h2>Особые точки</h2>
     <p>
-        Найдем особые точки, которым обладает система
+        Найдем особые точки, которыми обладает система
     </p>
     <d-math block>
         \begin{cases}
@@ -213,6 +212,163 @@
 <!--    <div id="sketch">-->
 <!--        <script src="lotka-volterra-3d.js"></script>-->
 <!--    </div>-->
+
+
+
+    <a class="marker" href="#section-3" id="section-3"><span>3</span></a>
+    <h2>Миграция животных</h2>
+    <p>
+        Существует усложнение стандартной модели Лотки-Вольтерра, при котором учитывается миграция животных. В такой модели
+        система принимает вид
+    </p>
+    <d-math block>
+        \begin{cases}
+            \dot{x} = (\alpha - \beta y) \, x + C(x) \\
+            \dot{y} = (-\gamma + \delta x) \, y + D(x)
+        \end{cases}
+    </d-math>
+    <p>
+        где $$C(x), \, D(x)$$ &#8212 миграция травоядных и хищников соответственно. Причем функции могут задаваться двумя
+        разными способами. В первом случае
+    </p>
+    <d-math block>
+        C(x) = c \geq 0 \qquad D(y) = d \geq 0,
+    </d-math>
+    <p>
+        то есть в каждый момент времени особи обеих популяций констатно мигрируют. Второй случае менее примитивен
+    </p>
+    <d-math block>
+        C(x) = \frac{c}{x} \qquad D(y) = \frac{d}{y},
+    </d-math>
+    <p>
+        то есть функции показывают отношение мигрирующих животных к общей массе. Для обоих случаев верно, что при положительных
+        константах $$c, d$$ особи будут прибывать в среду, при отрицательных &#8212 покидать, а при нулевых миграции не будет.
+    </p>
+    <p>
+        При данном задании модели возможны различные интересные комбинации миграции двух видов животных. Ниже рассмотрим
+        пару примеров, чтобы было понятно, что вообще происходит
+    </p>
+
+
+
+
+
+    <h3>Миграция травоядных в среду</h3>
+    <p>
+        Рассмотрим случай, когда мигрируют только жертвы по второму способу задания функций, то есть
+    </p>
+    <d-math block>
+        C(x) = \frac{c}{x}, \, c \geq 0 \qquad D(y) = 0
+    </d-math>
+    Найдем особые точки (сразу рассматриваем случай, когда размеры популяций ненулевые)
+    <d-math block>
+        \begin{cases}
+            \alpha x - \beta x y + \dfrac{c}{x} = 0 \\
+            -\gamma y + \delta x y = 0
+        \end{cases}
+        \, \longrightarrow \,
+        \begin{cases}
+            \beta x y = \alpha x + \dfrac{c}{x} \\
+            \\
+            x = \dfrac{\delta}{\gamma}
+        \end{cases}
+        \, \longrightarrow \,
+        \begin{cases}
+            y = \dfrac{\alpha \cdot \delta^2 + c \cdot \gamma^2}{\beta \cdot \delta^2} \\
+            \\
+            x = \dfrac{\delta}{\gamma}
+        \end{cases}
+    </d-math>
+    <p>А теперь исследуем на устойчивость: найдем якобиан и собственные значения</p>
+    <d-math block>
+        J = \begin{pmatrix}
+            \alpha - \beta y & -\beta x \\
+            \delta y & \delta x - \gamma
+        \end{pmatrix}
+    </d-math>
+    <d-math block>
+        \lambda^2 + \frac{\delta c}{\gamma} \cdot \lambda + \delta c + \alpha \gamma = 0
+    </d-math>
+    <d-math block>
+        \lambda_{1, 2} = a \pm i \omega, \text{ где } \omega = \sqrt{\alpha \gamma + \delta c - \frac{\delta^2 c^2}{4 \gamma^2}}, \, a = -\frac{\delta c}{2 \gamma}
+    </d-math>
+    <p>Если $$a = 0$$, то получаем особую точку типа центр, иначе &#8212 фокус, причем, если $$a < 0$$, то точка будет устойчивой,
+        если $$a > 0$$, то неустойчивой.
+    </p>
+
+
+
+
+    <h3>Миграция хищников в среду</h3>
+    <p>
+        Проделаем все то же самое для случая, когда хищники прибывают в среду, а травоядные не затронуты процессами миграции.
+    </p>
+    <d-math block>
+        C(x) = 0 \qquad D(y) = \frac{d}{y}
+    </d-math>
+    <p>
+        Опять найдем особые точки (а точнее, одну особую, так как случай, когда жертв нет, не интересн, так как хищники просто вымрут).
+    </p>
+    <d-math block>
+        \begin{cases}
+            \alpha x - \beta x y = 0
+            -\gamma y + \delta x y + \dfrac{d}{y} = 0
+        \end{cases}
+        \, \longrightarrow \,
+        \begin{cases}
+            y = \dfrac{\alpha}{\beta} \\
+            \\
+            \gamma y = \delta x y + \dfrac{d}{y}
+        \end{cases}
+        \, \longrightarrow \,
+        \begin{cases}
+            y = \dfrac{\alpha}{\beta} \\
+            \\
+            x = \dfrac{\alpha^2 \gamma - \beta^2 d}{\alpha^2 \delta}
+        \end{cases}
+    </d-math>
+    <p>
+        Теперь так же, как и в предыдущем случае, исследуем особую точку
+    </p>
+    <d-math block>
+        J = \begin{pmatrix}
+            \alpha - \beta y & - \beta x \\
+            \delta y & \delta x - \gamma
+        \end{pmatrix}
+    </d-math>
+    <d-math block>
+        \lambda^2 + \dfrac{\beta d}{\alpha} + \alpha \gamma - \beta d = 0
+    </d-math>
+    <d-math block>
+        \lambda_{1, 2} = a \pm i \omega, \text{ где } \omega = \sqrt{\beta d - \alpha \gamma - \dfrac{\beta^2 d^2}{4 \alpha^2}}, \, a = - \dfrac{\beta d}{2 \alpha}
+    </d-math>
+    <p>
+        Получаем такие же выводы: если $$a = 0$$, то получаем особую точку типа центр, иначе &#8212 фокус, причем, если $$a < 0$$, то точка будет устойчивой,
+        если $$a > 0$$, то неустойчивой. <d-cite key="model-ref-1"></d-cite>
+    </p>
+
+
+    <p>
+        Ниже можно поиграть с начальными условиями и понаблюдать, как они сказываются на поведение системы.
+    </p>
+
+    <p>
+    <h2><span class="mw-headline" id="Plot-3"></span></h2>
+    <h5>По горизонтальной оси отложено время, по вертикальной &#8212 значение размеры популяций жертв (синий) и хищников (красный)</h5>
+    <div id='jxgbox-migrate' class='jxgbox' style='width:600px; height:600px;'></div>
+
+    <script type="text/javascript" src="lotka-volterra-migration.js"></script>
+    </p>
+
+
+    <p>
+    <h2><span class="mw-headline" id="Plot-4"></span></h2>
+    <h5>Фазовый портрет в стандартном виде. По горизонтали &#8212 размер популяции жертв, по вертикали &#8212 хищников</h5>
+    <div id='jxgbox-mp' class='jxgbox' style='width:600px; height:600px;'></div>
+
+    <script type="text/javascript" src="lotka-volterra-migration-phase.js"></script>
+    </p>
+
 
 
 
