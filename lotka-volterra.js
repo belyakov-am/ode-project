@@ -3,7 +3,7 @@ board = JXG.JSXGraph.initBoard('jxgbox', {boundingbox: [-4, 40.5, 95.5, -3.5], a
 s = board.createElement('slider', [[10.0, 38.5], [20.0, 38.5], [0.0, 0.3, 1.0]],{name:'&alpha;',strokeColor:'black',fillColor:'black'});
 st = board.createElement('text', [10, 37.5, "alpha"], {fixed:true});
 
-o = board.createElement('slider', [[30.0, 38.5], [40.0, 38.5], [0.0, 0.1, 1.0]],{name:'&beta;',strokeColor:'black',fillColor:'black'});
+o = board.createElement('slider', [[30.0, 38.5], [40.0, 38.5], [0.0, 0.28, 1.0]],{name:'&beta;',strokeColor:'black',fillColor:'black'});
 ot = board.createElement('text', [30, 37.5, "beta"], {fixed:true});
 
 u = board.createElement('slider', [[50.0, 38.5], [60.0, 38.5], [0.0, 0.7, 1.0]],{name:'&gamma;',strokeColor:'black',fillColor:'black'});
@@ -12,8 +12,8 @@ ut = board.createElement('text', [50, 37.5, "gamma"], {fixed:true});
 p = board.createElement('slider', [[70.0, 38.5], [80.0, 38.5], [0.0, 0.3, 1.0]],{name:'&delta;',strokeColor:'black',fillColor:'black'});
 pt = board.createElement('text', [70, 37.5, "delta"], {fixed:true});
 
-startpred = board.createElement('glider', [0, 10, board.defaultAxes.y], {name:'Preys',strokeColor:'red',fillColor:'red'});
-startprey = board.createElement('glider', [0, 5, board.defaultAxes.y], {name:'Predators',strokeColor:'blue',fillColor:'blue'});
+startprey = board.createElement('glider', [0, 10, board.defaultAxes.y], {name:'Preys',strokeColor:'blue',fillColor:'blue'});
+startpred = board.createElement('glider', [0, 5, board.defaultAxes.y], {name:'Predators',strokeColor:'red',fillColor:'red'});
 
 
 var g3 = null;
@@ -48,7 +48,7 @@ function ode() {
         return y;
     };
 
-    var x0 = [startpred.Y(), startprey.Y()];
+    var x0 = [startprey.Y(), startpred.Y()];
 
     var data = solve_ode(x0, I, N, f);
 
@@ -68,9 +68,9 @@ var t = [];
 var dataprey = [];
 var datapred = [];
 for(var i=0; i<data.length; i++) {
+    dataprey[i] = data[i][0];
+    datapred[i] = data[i][1];
     t[i] = data[i][2];
-    datapred[i] = data[i][0];
-    dataprey[i] = data[i][1];
 }
 
 g3 = board.createElement('curve', [t, datapred], {strokeColor:'red', strokeWidth:'2px'});
@@ -80,7 +80,7 @@ g3.updateDataArray = function() {
     this.dataY = [];
     for(var i=0; i<data.length; i++) {
         this.dataX[i] = t[i];
-        this.dataY[i] = data[i][0];
+        this.dataY[i] = data[i][1];
     }
 };
 
@@ -91,6 +91,6 @@ g4.updateDataArray = function() {
     this.dataY = [];
     for(var i=0; i<data.length; i++) {
         this.dataX[i] = t[i];
-        this.dataY[i] = data[i][1];
+        this.dataY[i] = data[i][0];
     }
 };
